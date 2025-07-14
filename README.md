@@ -8,6 +8,12 @@ This is a module intended to be preloaded using `--import`.
 node --import @socketsecurity/promise-diagnostics-hook/register
 ```
 
+To include debugging you can see the full list of logs for async hooks and even see results for a specific id.
+
+```sh
+NODE_DEBUG=promise_misuse PROMISE_MISUSE_RAW=82 node --import ./hooks.mjs test.mjs
+```
+
 ## Stability
 
 This is pre-alpha software intended to be used for debugging and internal tools. It relies on timing and internal details of how Promises are queued by v8 for Node's `async_hooks` module.
