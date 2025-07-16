@@ -2,16 +2,20 @@
 
 ## Usage
 
-This is a module intended to be preloaded using `--import`.
+This is a module intended to produce dumps when preloaded using `--import`.
 
-```sh
-node --import @socketsecurity/promise-diagnostics-hook/register
+It can configure where the dump is saved using the `PROMISE_DIAGNOSTICS_HOOK_LOG` environment variable:
+
+```sh filename=collect.sh
+PROMISE_DIAGNOSTICS_HOOK_LOG="async_hooks.log" node --import "@socketsecurity/promise-diagnostics-hook/register" app.mjs
 ```
 
-To include debugging you can see the full list of logs for async hooks and even see results for a specific id.
+This will dump all the information about async hooks invocations into the log file specified. If no log file is specified one will be allocated like: `$DATE.$PROCESS_ID.$THREAD_ID.async_hooks.ndjson`.
 
-```sh
-NODE_DEBUG=promise_misuse PROMISE_MISUSE_RAW=82 node --import ./hooks.mjs test.mjs
+In order to understand the logs you can use the reporter:
+
+```sh filename=diagnose.sh
+npx @ssocketsecurity/promise-debug-hook/analyze "${PROMISE_DIAGNOSTICS_HOOK_LOG}"
 ```
 
 ## Stability

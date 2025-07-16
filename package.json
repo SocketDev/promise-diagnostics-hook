@@ -2,17 +2,19 @@
     "name": "@socketsecurity/promise-diagnostics-hook",
     "version": "0.0.0-prealpha",
     "exports": {
-        "./register": "./hooks.mjs"
+        "./register": "./hooks.mts",
+        "./analyze": "./analyze.mts"
     },
     "imports": {
-        "#register": "./hooks.mjs"
+        "#register": "./hooks.mts"
     },
     "type": "module",
     "engines": {
-        "node": ">=22.0.0"
+        "node": ">=24.0.0"
     },
     "scripts": {
-        "test": "node --import '#register' ./test.mjs"
+        "cover": "sh cover.sh",
+        "test": "node --import '#register' ./test.mts"
     },
     "license": "MIT"
 }
